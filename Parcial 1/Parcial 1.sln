@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.37530.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parcial 1", "Parcial 1.csproj", "{FB6A8234-3AFE-4BEF-AA23-F68AA860454E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conversor de area", "Conversor de area.csproj", "{FB6A8234-3AFE-4BEF-AA23-F68AA860454E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
