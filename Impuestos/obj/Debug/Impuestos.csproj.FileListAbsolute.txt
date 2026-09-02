@@ -8,3 +8,13 @@ C:\Users\jeffe\source\repos\Impuestos\obj\Debug\Impuestos.csproj.GenerateResourc
 C:\Users\jeffe\source\repos\Impuestos\obj\Debug\Impuestos.csproj.CoreCompileInputs.cache
 C:\Users\jeffe\source\repos\Impuestos\obj\Debug\Impuestos.exe
 C:\Users\jeffe\source\repos\Impuestos\obj\Debug\Impuestos.pdb
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\bin\Debug\Impuestos.exe.config
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\bin\Debug\Impuestos.exe
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\bin\Debug\Impuestos.pdb
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.csproj.AssemblyReference.cache
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.Form1.resources
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.Properties.Resources.resources
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.csproj.GenerateResource.cache
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.csproj.CoreCompileInputs.cache
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.exe
+C:\Users\jeffe\Source\Repos\progal-semi-2026\Impuestos\obj\Debug\Impuestos.pdb

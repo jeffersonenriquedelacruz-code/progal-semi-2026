@@ -49,6 +49,7 @@ namespace Parcial_1
             this.label1.Size = new System.Drawing.Size(200, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "Conversor de Área ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 

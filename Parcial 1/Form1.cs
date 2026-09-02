@@ -19,12 +19,25 @@ namespace Parcial_1
             // Cargar unidades al iniciar
             CargarUnidades();
 
-            // Forzar la suscripción al evento del botón por si no está en el Designer
+            // Asegurar el enlace del evento Click del botón
             if (button1 != null)
             {
-                button1.Click -= button1_Click; // Evita duplicar suscripción
+                button1.Click -= button1_Click;
                 button1.Click += button1_Click;
             }
+        }
+
+        // Métodos de eventos registrados por el Designer
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
         }
 
         private void CargarUnidades()
@@ -45,8 +58,8 @@ namespace Parcial_1
             comboBox1.Items.AddRange(unidades);
             comboBox2.Items.AddRange(unidades);
 
-            comboBox1.SelectedIndex = 3; // Metro Cuadrado 
-            comboBox2.SelectedIndex = 1; // Vara Cuadrada 
+            comboBox1.SelectedIndex = 5; // Manzana por defecto
+            comboBox2.SelectedIndex = 4; // Tareas por defecto
 
             label4.Text = "Resultado: ---";
         }
@@ -88,7 +101,10 @@ namespace Parcial_1
 
         private double ConvertirArea(double valor, string origen, string destino)
         {
-            
+            // Factor: 1 Manzana = 6988.96 m²
+            // Factor: 1 Tarea = 6988.96 / 16 = 436.81 m² (1 Manzana = 16 Tareas)
+
+            // 1. Convertir la unidad de origen a metros cuadrados (m²)
             double enMetrosCuadrados = 0;
 
             switch (origen)
@@ -106,7 +122,7 @@ namespace Parcial_1
                     enMetrosCuadrados = valor;
                     break;
                 case "Tareas":
-                    enMetrosCuadrados = valor * 628.86;
+                    enMetrosCuadrados = valor * 437.5;
                     break;
                 case "Manzana":
                     enMetrosCuadrados = valor * 6988.96;
@@ -118,7 +134,7 @@ namespace Parcial_1
                     return 0;
             }
 
-            // 2. Convertir de metros cuadrados (m²) a la otra unidad 
+            // 2. Convertir de metros cuadrados (m²) a la unidad de destino
             double resultado = 0;
 
             switch (destino)
@@ -136,7 +152,7 @@ namespace Parcial_1
                     resultado = enMetrosCuadrados;
                     break;
                 case "Tareas":
-                    resultado = enMetrosCuadrados / 628.86;
+                    resultado = enMetrosCuadrados / 436.81;
                     break;
                 case "Manzana":
                     resultado = enMetrosCuadrados / 6988.96;
@@ -149,16 +165,6 @@ namespace Parcial_1
             }
 
             return resultado;
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
