@@ -1,0 +1,10 @@
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\bin\Debug\Parcial 1.exe.config
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\bin\Debug\Parcial 1.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\bin\Debug\Parcial 1.pdb
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial 1.csproj.AssemblyReference.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial_1.Form1.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial_1.Properties.Resources.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial 1.csproj.GenerateResource.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial 1.csproj.CoreCompileInputs.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial 1.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\Parcial 1\obj\Debug\Parcial 1.pdb

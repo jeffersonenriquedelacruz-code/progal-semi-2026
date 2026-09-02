@@ -1,0 +1,10 @@
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\bin\Debug\Conversores2.exe.config
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\bin\Debug\Conversores2.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\bin\Debug\Conversores2.pdb
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.csproj.AssemblyReference.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.Form1.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.Properties.Resources.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.csproj.GenerateResource.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.csproj.CoreCompileInputs.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\Conversores2\obj\Debug\Conversores2.pdb

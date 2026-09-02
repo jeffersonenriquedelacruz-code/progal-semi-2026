@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{25296556-E9EC-4972-AD94-72249FBF2FF8}</ProjectGuid>
+    <ProjectGuid>{FB6A8234-3AFE-4BEF-AA23-F68AA860454E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Conversores2</RootNamespace>
-    <AssemblyName>Conversores2</AssemblyName>
+    <RootNamespace>Parcial_1</RootNamespace>
+    <AssemblyName>Parcial 1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

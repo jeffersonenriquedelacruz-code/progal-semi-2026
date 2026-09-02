@@ -1,0 +1,5 @@
+C:\Users\jeffe\source\repos\progal-semi-2026\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\WindowsFormsApp1\obj\Debug\EstablecimientodeSalud.Form1.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
