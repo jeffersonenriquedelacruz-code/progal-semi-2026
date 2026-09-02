@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Parcial 1",
+    "\\Parcial 1\\bin",
+    "\\Parcial 1\\obj",
+    "\\Parcial 1\\Properties"
   ],
-  "SelectedNode": "\\C:\\Users\\jeffe\\Source\\Repos\\progal-semi-2026",
+  "SelectedNode": "\\Parcial 1\\Form1.Designer.cs",
   "PreviewInSolutionExplorer": false
 }
