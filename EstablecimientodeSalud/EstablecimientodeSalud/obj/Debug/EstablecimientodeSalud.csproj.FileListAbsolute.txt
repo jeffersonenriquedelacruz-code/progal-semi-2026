@@ -8,3 +8,13 @@ C:\Users\jair\source\repos\progral-semi-2026\EstablecimientodeSalud\Establecimie
 C:\Users\jair\source\repos\progral-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.csproj.CoreCompileInputs.cache
 C:\Users\jair\source\repos\progral-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.exe
 C:\Users\jair\source\repos\progral-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.pdb
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\bin\Debug\EstablecimientodeSalud.exe.config
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\bin\Debug\EstablecimientodeSalud.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\bin\Debug\EstablecimientodeSalud.pdb
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.csproj.AssemblyReference.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.Form1.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.Properties.Resources.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.csproj.GenerateResource.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.csproj.CoreCompileInputs.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\EstablecimientodeSalud\EstablecimientodeSalud\obj\Debug\EstablecimientodeSalud.pdb
