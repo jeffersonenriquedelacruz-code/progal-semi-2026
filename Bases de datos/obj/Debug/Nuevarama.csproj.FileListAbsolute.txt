@@ -1,0 +1,13 @@
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\bin\Debug\db_academica.mdf
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\bin\Debug\db_academica_log.ldf
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\bin\Debug\Nuevarama.exe.config
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\bin\Debug\Nuevarama.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\bin\Debug\Nuevarama.pdb
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.csproj.AssemblyReference.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.frm_usuario.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.Properties.Resources.resources
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.csproj.GenerateResource.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.csproj.CoreCompileInputs.cache
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.exe
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.pdb
+C:\Users\jeffe\source\repos\progal-semi-2026\Bases de datos\obj\Debug\Nuevarama.login.resources
