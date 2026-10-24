@@ -28,32 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            btnProbar = new Button();
             SuspendLayout();
             // 
-            // label1
+            // btnProbar
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(320, 61);
-            label1.Name = "label1";
-            label1.Size = new Size(103, 20);
-            label1.TabIndex = 0;
-            label1.Text = "BIENVENIDOS";
+            btnProbar.Location = new Point(116, 83);
+            btnProbar.Name = "btnProbar";
+            btnProbar.Size = new Size(94, 29);
+            btnProbar.TabIndex = 0;
+            btnProbar.Text = "Probar conecxion";
+            btnProbar.UseVisualStyleBackColor = true;
+            btnProbar.Click += btnProbar_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            Controls.Add(btnProbar);
             Name = "Form1";
-            Text = "Form1";
+            Text = "EmpleoLocal";
+            Load += Form1_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Button btnProbar;
     }
 }
