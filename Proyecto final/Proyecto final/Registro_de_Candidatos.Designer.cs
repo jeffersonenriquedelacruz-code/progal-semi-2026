@@ -183,7 +183,7 @@
             // cmbCiudades
             // 
             cmbCiudades.FormattingEnabled = true;
-            cmbCiudades.Location = new Point(676, 145);
+            cmbCiudades.Location = new Point(669, 145);
             cmbCiudades.Name = "cmbCiudades";
             cmbCiudades.Size = new Size(303, 28);
             cmbCiudades.TabIndex = 14;
