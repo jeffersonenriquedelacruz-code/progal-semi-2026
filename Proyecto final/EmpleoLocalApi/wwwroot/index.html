@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empleo Local</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="ventana">
+        <h1>EMPLEO LOCAL</h1>
+        <h2>Encuentra el trabajo que necesitas</h2>
+
+        <input type="text" id="txtBuscar" autocomplete="off">
+        <button type="button" id="btnBuscar">Buscar</button>
+
+        <ul id="resultados"></ul>
+    </div>
+
+    <script>
+            async function buscar() {
+              const texto = document.getElementById("txtBuscar").value;
+              const respuesta = await fetch("/api/empleos?texto=" + encodeURIComponent(texto));
+              const empleos = await respuesta.json();
+              const lista = document.getElementById("resultados");
+              lista.innerHTML = "";
+              empleos.forEach(e => {
+                const li = document.createElement("li");
+                li.textContent = e.titulo + " - " + e.lugar;
+                lista.appendChild(li);
+              });
+            }
+
+            document.getElementById("btnBuscar").addEventListener("click", buscar);
+            document.getElementById("txtBuscar").addEventListener("keydown", e => {
+              if (e.key === "Enter") buscar();
+            });
+    </script>
+</body>
+</html>
