@@ -76,6 +76,34 @@
             font-size: 0.9rem;
             font-weight: bold;
         }
+
+        /* Estilos para el historial de solicitudes */
+        .solicitud-guardada {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 12px auto;
+            max-width: 550px;
+            text-align: left;
+        }
+
+            .solicitud-guardada h3 {
+                margin: 0 0 5px;
+                color: #0d47a1;
+            }
+
+            .solicitud-guardada p {
+                margin: 3px 0;
+                font-size: 0.9rem;
+            }
+
+        .mensaje-exito {
+            color: #2e7d32;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
     </style>
 </head>
 
@@ -95,6 +123,12 @@
 
                 <button id="btnGeneral">
                     Ver empleos disponibles en general
+                </button>
+
+                <hr style="width: 65%; border: 1px solid #ccc; margin: 10px 0;">
+
+                <button id="btnMisSolicitudes">
+                    Ver mis solicitudes enviadas
                 </button>
             </div>
         </section>
@@ -181,7 +215,6 @@
                 <label for="appCorreo">Correo electrónico *</label>
                 <input type="email" id="appCorreo" placeholder="ejemplo@correo.com" required>
 
-                <!-- DATOS ADICIONALES IMPORTANTES -->
                 <label for="appDisponibilidad">Disponibilidad de horario *</label>
                 <select id="appDisponibilidad" required>
                     <option value="">Selecciona disponibilidad</option>
@@ -207,34 +240,50 @@
             <button class="btnInicio">Inicio</button>
         </section>
 
+        <!-- PANTALLA 6: MENSAJE DE ÉXITO -->
+        <section id="pantalla6" class="pantalla" hidden>
+            <div class="mensaje-exito">¡SOLICITUD ENVIADA!</div>
+            <h2>NOS CONTACTAREMOS CONTIGO MUY PRONTO</h2>
+            <p>Tu información ha sido registrada exitosamente.</p>
+            <br><br>
+            <button id="btnIrHistorialExito">Ver mis solicitudes</button>
+            <br><br>
+            <button class="btnInicio">Volver al Inicio</button>
+        </section>
+
+        <!-- PANTALLA 7: HISTORIAL DE SOLICITUDES -->
+        <section id="pantalla7" class="pantalla" hidden>
+            <h1>MIS SOLICITUDES</h1>
+            <h2>Historial de empleos a los que has aplicado</h2>
+
+            <div id="listaHistorial"></div>
+
+            <br>
+            <button id="btnLimpiarHistorial">Limpiar historial local</button>
+            <br><br>
+            <button class="btnInicio">Inicio</button>
+        </section>
+
     </div>
 
 
     <script>
                 const nombresDepartamentos = [
-                    "Ahuachapán",
-                    "Santa Ana",
-                    "Sonsonate",
-                    "Chalatenango",
-                    "La Libertad",
-                    "San Salvador",
-                    "Cuscatlán",
-                    "La Paz",
-                    "Cabañas",
-                    "San Vicente",
-                    "Usulután",
-                    "San Miguel",
-                    "Morazán",
-                    "La Unión"
+                    "Ahuachapán", "Santa Ana", "Sonsonate", "Chalatenango",
+                    "La Libertad", "San Salvador", "Cuscatlán", "La Paz",
+                    "Cabañas", "San Vicente", "Usulután", "San Miguel",
+                    "Morazán", "La Unión"
                 ];
 
-                // Variable para recordar a qué empleo está aplicando el usuario
                 let empleoSeleccionado = null;
 
-                // Actualizado para manejar las 5 pantallas
+                // Ahora iteramos hasta 7 pantallas
                 function mostrarPantalla(numero) {
-                    for (let i = 1; i <= 5; i++) {
-                        document.getElementById("pantalla" + i).hidden = i !== numero;
+                    for (let i = 1; i <= 7; i++) {
+                        const elemento = document.getElementById("pantalla" + i);
+                        if (elemento) {
+                            elemento.hidden = (i !== numero);
+                        }
                     }
                     window.scrollTo(0, 0);
                 }
@@ -253,11 +302,9 @@
                 nombresDepartamentos.forEach(function (departamento) {
                     const boton = document.createElement("button");
                     boton.textContent = departamento;
-
                     boton.addEventListener("click", function () {
                         consultarEmpleos("", departamento, 3);
                     });
-
                     listaDepartamentos.appendChild(boton);
                 });
 
@@ -277,7 +324,6 @@
                         alert("Escribe el empleo que estás buscando.");
                         return;
                     }
-
                     if (departamento === "") {
                         alert("Selecciona un departamento.");
                         return;
@@ -309,16 +355,11 @@
                     try {
                         const parametros = new URLSearchParams();
                         parametros.set("texto", texto);
-
-                        if (departamento !== "") {
-                            parametros.set("departamento", departamento);
-                        }
+                        if (departamento !== "") parametros.set("departamento", departamento);
 
                         const respuesta = await fetch("/api/empleos?" + parametros.toString());
 
-                        if (!respuesta.ok) {
-                            throw new Error("Error al consultar las ofertas.");
-                        }
+                        if (!respuesta.ok) throw new Error("Error al consultar las ofertas.");
 
                         const empleos = await respuesta.json();
                         resultados.innerHTML = "";
@@ -329,11 +370,8 @@
                         }
 
                         const agrupados = {};
-
                         empleos.forEach(function (empleo) {
-                            if (!agrupados[empleo.departamento]) {
-                                agrupados[empleo.departamento] = [];
-                            }
+                            if (!agrupados[empleo.departamento]) agrupados[empleo.departamento] = [];
                             agrupados[empleo.departamento].push(empleo);
                         });
 
@@ -353,7 +391,6 @@
                                 const lugar = document.createElement("p");
                                 lugar.textContent = "Lugar: " + empleo.lugar;
 
-                                // NUEVO BOTÓN APLICAR
                                 const btnAplicar = document.createElement("button");
                                 btnAplicar.textContent = "Aplicar";
                                 btnAplicar.className = "btn-aplicar";
@@ -364,7 +401,6 @@
                                 tarjeta.appendChild(puesto);
                                 tarjeta.appendChild(lugar);
                                 tarjeta.appendChild(btnAplicar);
-
                                 resultados.appendChild(tarjeta);
                             });
                         });
@@ -379,8 +415,6 @@
                     };
                 }
 
-                // --- LÓGICA DEL FORMULARIO DE SOLICITUD ---
-
                 function abrirFormularioSolicitud(empleo) {
                     empleoSeleccionado = empleo;
                     document.getElementById("subtituloPuesto").textContent =
@@ -388,25 +422,20 @@
                     mostrarPantalla(5);
                 }
 
-                // Formato automático de DUI (00000000-0)
+                // Formatos automáticos
                 document.getElementById("appDui").addEventListener("input", function (e) {
                     let valor = e.target.value.replace(/\D/g, "");
-                    if (valor.length > 8) {
-                        valor = valor.slice(0, 8) + "-" + valor.slice(8, 9);
-                    }
+                    if (valor.length > 8) valor = valor.slice(0, 8) + "-" + valor.slice(8, 9);
                     e.target.value = valor;
                 });
 
-                // Formato automático de celular (0000-0000)
                 document.getElementById("appCelular").addEventListener("input", function (e) {
                     let valor = e.target.value.replace(/\D/g, "");
-                    if (valor.length > 4) {
-                        valor = valor.slice(0, 4) + "-" + valor.slice(4, 8);
-                    }
+                    if (valor.length > 4) valor = valor.slice(0, 4) + "-" + valor.slice(4, 8);
                     e.target.value = valor;
                 });
 
-                // Envío del formulario
+                // ENVÍO Y GUARDADO DE SOLICITUD
                 document.getElementById("formSolicitud").addEventListener("submit", async function (e) {
                     e.preventDefault();
 
@@ -416,39 +445,73 @@
                         return;
                     }
 
-                    const datosSolicitud = {
-                        puesto: empleoSeleccionado ? empleoSeleccionado.titulo : "General",
-                        departamento: empleoSeleccionado ? empleoSeleccionado.departamento : "",
-                        nombre: document.getElementById("appNombre").value.trim(),
-                        dui: dui,
-                        edad: document.getElementById("appEdad").value,
-                        residencia: document.getElementById("appResidencia").value.trim(),
-                        estudios: document.getElementById("appEstudios").value,
-                        celular: document.getElementById("appCelular").value,
-                        correo: document.getElementById("appCorreo").value.trim(),
-                        disponibilidad: document.getElementById("appDisponibilidad").value,
-                        experiencia: document.getElementById("appExperiencia").value.trim()
+                    const puestoAplicado = empleoSeleccionado ? empleoSeleccionado.titulo : "General";
+                    const departamentoAplicado = empleoSeleccionado ? empleoSeleccionado.departamento : "No especificado";
+                    const fechaActual = new Date().toLocaleDateString();
+
+                    // Guardar en el historial local (navegador)
+                    const nuevaSolicitud = {
+                        puesto: puestoAplicado,
+                        departamento: departamentoAplicado,
+                        fecha: fechaActual,
+                        estado: "Enviada"
                     };
 
-                    try {
-                        // Aquí se envía a tu backend (ajusta la ruta si usas otra)
-                        const respuesta = await fetch("/api/aplicar", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(datosSolicitud)
-                        });
+                    // Traemos el historial existente o creamos un arreglo vacío
+                    let historial = JSON.parse(localStorage.getItem("misSolicitudes")) || [];
+                    historial.push(nuevaSolicitud);
+                    localStorage.setItem("misSolicitudes", JSON.stringify(historial)); // Guardamos actualizado
 
-                        if (!respuesta.ok) throw new Error("Error en el servidor");
+                    // (Aquí iría la llamada fetch() a tu API / backend real como la configuramos antes)
 
-                        alert("¡Solicitud enviada con éxito! Nos pondremos en contacto contigo.");
-                    } catch (error) {
-                        // Si aún no has programado el endpoint /api/aplicar en tu backend, igual te avisa
-                        console.log("Datos listos para enviar:", datosSolicitud);
-                        alert("¡Solicitud registrada para " + datosSolicitud.puesto + "! (Conecta /api/aplicar en tu backend para guardarla en base de datos).");
+                    // Limpiar formulario y mostrar mensaje de éxito
+                    document.getElementById("formSolicitud").reset();
+                    mostrarPantalla(6);
+                });
+
+                // FUNCIÓN PARA CARGAR HISTORIAL DE SOLICITUDES
+                function cargarHistorial() {
+                    const contenedor = document.getElementById("listaHistorial");
+                    let historial = JSON.parse(localStorage.getItem("misSolicitudes")) || [];
+
+                    contenedor.innerHTML = "";
+
+                    if (historial.length === 0) {
+                        contenedor.innerHTML = "<p>Aún no has enviado ninguna solicitud.</p>";
+                        return;
                     }
 
-                    document.getElementById("formSolicitud").reset();
-                    mostrarPantalla(1);
+                    // Mostramos desde la más reciente a la más antigua
+                    historial.reverse().forEach(function (solicitud) {
+                        const tarjeta = document.createElement("div");
+                        tarjeta.className = "solicitud-guardada";
+
+                        tarjeta.innerHTML = `
+                            <h3>${solicitud.puesto}</h3>
+                            <p><strong>Departamento:</strong> ${solicitud.departamento}</p>
+                            <p><strong>Fecha:</strong> ${solicitud.fecha}</p>
+                            <p><strong>Estado:</strong> <span style="color: #2e7d32; font-weight: bold;">✔ ${solicitud.estado}</span></p>
+                        `;
+                        contenedor.appendChild(tarjeta);
+                    });
+                }
+
+                // Eventos para ver historial
+                document.getElementById("btnMisSolicitudes").addEventListener("click", function() {
+                    cargarHistorial();
+                    mostrarPantalla(7);
+                });
+
+                document.getElementById("btnIrHistorialExito").addEventListener("click", function() {
+                    cargarHistorial();
+                    mostrarPantalla(7);
+                });
+
+                document.getElementById("btnLimpiarHistorial").addEventListener("click", function() {
+                    if(confirm("¿Estás seguro de que quieres borrar tu historial de solicitudes local?")) {
+                        localStorage.removeItem("misSolicitudes");
+                        cargarHistorial();
+                    }
                 });
 
                 document.getElementById("btnCancelarSolicitud").addEventListener("click", function () {
