@@ -45,19 +45,36 @@
                 margin: 0 0 8px;
             }
 
+        .btn-aplicar {
+            margin-top: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         .departamento-titulo {
             margin-top: 25px;
             border-bottom: 2px solid #555;
             padding-bottom: 6px;
         }
 
-        input, select {
+        input, select, textarea {
             display: block;
             width: 65%;
             min-height: 35px;
-            margin: 12px auto;
-            padding: 5px;
+            margin: 10px auto;
+            padding: 6px;
             box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        label {
+            display: block;
+            width: 65%;
+            margin: 12px auto -6px auto;
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -66,7 +83,7 @@
 
     <div class="ventana">
 
-        
+        <!-- PANTALLA 1: INICIO -->
         <section id="pantalla1" class="pantalla">
             <h1>EMPLEO LOCAL</h1>
             <h2>Encuentra el trabajo que necesitas</h2>
@@ -83,7 +100,7 @@
         </section>
 
 
-       
+        <!-- PANTALLA 2: BÚSQUEDA ESPECÍFICA -->
         <section id="pantalla2" class="pantalla" hidden>
             <h1>BUSCAR EMPLEO</h1>
             <h2>Escribe el puesto y selecciona el departamento</h2>
@@ -102,7 +119,7 @@
         </section>
 
 
-       
+        <!-- PANTALLA 3: POR DEPARTAMENTO -->
         <section id="pantalla3" class="pantalla" hidden>
             <h1>EMPLEOS DISPONIBLES</h1>
             <h2>Selecciona un departamento</h2>
@@ -116,7 +133,7 @@
         </section>
 
 
-        
+        <!-- PANTALLA 4: RESULTADOS -->
         <section id="pantalla4" class="pantalla" hidden>
             <h1 id="tituloResultados">OFERTAS DE EMPLEO</h1>
 
@@ -128,81 +145,131 @@
             <button class="btnInicio">Inicio</button>
         </section>
 
+
+        <!-- PANTALLA 5: FORMULARIO DE SOLICITUD -->
+        <section id="pantalla5" class="pantalla" hidden>
+            <h1>SOLICITUD DE EMPLEO</h1>
+            <h2 id="subtituloPuesto">Aplicando a: Puesto</h2>
+
+            <form id="formSolicitud">
+                <label for="appNombre">Nombre completo *</label>
+                <input type="text" id="appNombre" placeholder="Ej: Juan Carlos Pérez" required>
+
+                <label for="appDui">Número de DUI *</label>
+                <input type="text" id="appDui" placeholder="00000000-0" maxlength="10" required>
+
+                <label for="appEdad">Edad *</label>
+                <input type="number" id="appEdad" min="18" max="80" placeholder="Ej: 25" required>
+
+                <label for="appResidencia">Dirección / Municipio de residencia *</label>
+                <input type="text" id="appResidencia" placeholder="Ej: Col. Escalón, San Salvador" required>
+
+                <label for="appEstudios">Nivel de estudios alcanzado *</label>
+                <select id="appEstudios" required>
+                    <option value="">Selecciona tu nivel académico</option>
+                    <option value="Educación Básica">Educación Básica (9° grado)</option>
+                    <option value="Bachillerato General">Bachillerato General</option>
+                    <option value="Bachillerato Técnico">Bachillerato Técnico Vocacional</option>
+                    <option value="Técnico Superior">Técnico Superior / Universitario en curso</option>
+                    <option value="Universitario Graduado">Universitario Graduado</option>
+                    <option value="Otro / Cursos">Otro / Cursos especializados</option>
+                </select>
+
+                <label for="appCelular">Número de celular *</label>
+                <input type="tel" id="appCelular" placeholder="Ej: 7000-0000" maxlength="9" required>
+
+                <label for="appCorreo">Correo electrónico *</label>
+                <input type="email" id="appCorreo" placeholder="ejemplo@correo.com" required>
+
+                <!-- DATOS ADICIONALES IMPORTANTES -->
+                <label for="appDisponibilidad">Disponibilidad de horario *</label>
+                <select id="appDisponibilidad" required>
+                    <option value="">Selecciona disponibilidad</option>
+                    <option value="Tiempo completo">Tiempo completo</option>
+                    <option value="Medio tiempo">Medio tiempo</option>
+                    <option value="Turnos rotativos / Fines de semana">Turnos rotativos / Fines de semana</option>
+                    <option value="Inmediata">Incorporación inmediata</option>
+                </select>
+
+                <label for="appExperiencia">Experiencia previa en el área (Opcional)</label>
+                <textarea id="appExperiencia" rows="3" placeholder="Resume brevemente si has trabajado antes en algo similar..."></textarea>
+
+                <label for="appCv">Adjuntar Currículum en PDF (Opcional)</label>
+                <input type="file" id="appCv" accept=".pdf">
+
+                <br>
+                <button type="submit" id="btnEnviarSolicitud">Enviar solicitud</button>
+            </form>
+
+            <br>
+            <button id="btnCancelarSolicitud">Volver a las ofertas</button>
+            <br><br>
+            <button class="btnInicio">Inicio</button>
+        </section>
+
     </div>
 
 
     <script>
+                const nombresDepartamentos = [
+                    "Ahuachapán",
+                    "Santa Ana",
+                    "Sonsonate",
+                    "Chalatenango",
+                    "La Libertad",
+                    "San Salvador",
+                    "Cuscatlán",
+                    "La Paz",
+                    "Cabañas",
+                    "San Vicente",
+                    "Usulután",
+                    "San Miguel",
+                    "Morazán",
+                    "La Unión"
+                ];
 
-            const nombresDepartamentos = [
-                "Ahuachapán",
-                "Santa Ana",
-                "Sonsonate",
-                "Chalatenango",
-                "La Libertad",
-                "San Salvador",
-                "Cuscatlán",
-                "La Paz",
-                "Cabañas",
-                "San Vicente",
-                "Usulután",
-                "San Miguel",
-                "Morazán",
-                "La Unión"
-            ];
+                // Variable para recordar a qué empleo está aplicando el usuario
+                let empleoSeleccionado = null;
 
-
-            function mostrarPantalla(numero) {
-                for (let i = 1; i <= 4; i++) {
-                    document.getElementById("pantalla" + i).hidden = i !== numero;
+                // Actualizado para manejar las 5 pantallas
+                function mostrarPantalla(numero) {
+                    for (let i = 1; i <= 5; i++) {
+                        document.getElementById("pantalla" + i).hidden = i !== numero;
+                    }
+                    window.scrollTo(0, 0);
                 }
-            }
 
+                const selectDepartamento = document.getElementById("departamentoBusqueda");
 
-            const selectDepartamento =
-                document.getElementById("departamentoBusqueda");
-
-            nombresDepartamentos.forEach(function (departamento) {
-                const opcion = document.createElement("option");
-                opcion.value = departamento;
-                opcion.textContent = departamento;
-                selectDepartamento.appendChild(opcion);
-            });
-
-
-            const listaDepartamentos =
-                document.getElementById("listaDepartamentos");
-
-            nombresDepartamentos.forEach(function (departamento) {
-                const boton = document.createElement("button");
-
-                boton.textContent = departamento;
-
-                boton.addEventListener("click", function () {
-                    consultarEmpleos("", departamento, 3);
+                nombresDepartamentos.forEach(function (departamento) {
+                    const opcion = document.createElement("option");
+                    opcion.value = departamento;
+                    opcion.textContent = departamento;
+                    selectDepartamento.appendChild(opcion);
                 });
 
-                listaDepartamentos.appendChild(boton);
-            });
+                const listaDepartamentos = document.getElementById("listaDepartamentos");
 
+                nombresDepartamentos.forEach(function (departamento) {
+                    const boton = document.createElement("button");
+                    boton.textContent = departamento;
 
-           
-            document.getElementById("btnBuscarEspecifico")
-                .addEventListener("click", function () {
+                    boton.addEventListener("click", function () {
+                        consultarEmpleos("", departamento, 3);
+                    });
+
+                    listaDepartamentos.appendChild(boton);
+                });
+
+                document.getElementById("btnBuscarEspecifico").addEventListener("click", function () {
                     mostrarPantalla(2);
                 });
 
-
-         
-            document.getElementById("btnGeneral")
-                .addEventListener("click", function () {
+                document.getElementById("btnGeneral").addEventListener("click", function () {
                     mostrarPantalla(3);
                 });
 
-
-          
-            document.getElementById("btnEjecutarBusqueda")
-                .addEventListener("click", function () {
-
+                document.getElementById("btnEjecutarBusqueda").addEventListener("click", function () {
                     const texto = document.getElementById("txtBuscar").value.trim();
                     const departamento = selectDepartamento.value;
 
@@ -219,118 +286,180 @@
                     consultarEmpleos(texto, departamento, 2);
                 });
 
-
-           
-            document.getElementById("btnTodos")
-                .addEventListener("click", function () {
+                document.getElementById("btnTodos").addEventListener("click", function () {
                     consultarEmpleos("", "", 3);
                 });
 
+                async function consultarEmpleos(texto, departamento, pantallaRegreso) {
+                    mostrarPantalla(4);
 
-            
-            async function consultarEmpleos(texto, departamento, pantallaRegreso) {
+                    const resultados = document.getElementById("resultados");
+                    const titulo = document.getElementById("tituloResultados");
 
-                mostrarPantalla(4);
+                    if (texto !== "") {
+                        titulo.textContent = "RESULTADOS: " + texto.toUpperCase();
+                    } else if (departamento !== "") {
+                        titulo.textContent = "EMPLEOS EN " + departamento.toUpperCase();
+                    } else {
+                        titulo.textContent = "TODOS LOS EMPLEOS DISPONIBLES";
+                    }
 
-                const resultados = document.getElementById("resultados");
-                const titulo = document.getElementById("tituloResultados");
+                    resultados.innerHTML = "<p>Buscando ofertas...</p>";
 
-                if (texto !== "") {
-                    titulo.textContent = "RESULTADOS: " + texto.toUpperCase();
-                } else if (departamento !== "") {
-                    titulo.textContent = "EMPLEOS EN " + departamento.toUpperCase();
-                } else {
-                    titulo.textContent = "TODOS LOS EMPLEOS DISPONIBLES";
+                    try {
+                        const parametros = new URLSearchParams();
+                        parametros.set("texto", texto);
+
+                        if (departamento !== "") {
+                            parametros.set("departamento", departamento);
+                        }
+
+                        const respuesta = await fetch("/api/empleos?" + parametros.toString());
+
+                        if (!respuesta.ok) {
+                            throw new Error("Error al consultar las ofertas.");
+                        }
+
+                        const empleos = await respuesta.json();
+                        resultados.innerHTML = "";
+
+                        if (empleos.length === 0) {
+                            resultados.innerHTML = "<p>No se encontraron ofertas de empleo.</p>";
+                            return;
+                        }
+
+                        const agrupados = {};
+
+                        empleos.forEach(function (empleo) {
+                            if (!agrupados[empleo.departamento]) {
+                                agrupados[empleo.departamento] = [];
+                            }
+                            agrupados[empleo.departamento].push(empleo);
+                        });
+
+                        Object.keys(agrupados).sort().forEach(function (nombre) {
+                            const encabezado = document.createElement("h2");
+                            encabezado.className = "departamento-titulo";
+                            encabezado.textContent = nombre;
+                            resultados.appendChild(encabezado);
+
+                            agrupados[nombre].forEach(function (empleo) {
+                                const tarjeta = document.createElement("div");
+                                tarjeta.className = "oferta";
+
+                                const puesto = document.createElement("h3");
+                                puesto.textContent = empleo.titulo;
+
+                                const lugar = document.createElement("p");
+                                lugar.textContent = "Lugar: " + empleo.lugar;
+
+                                // NUEVO BOTÓN APLICAR
+                                const btnAplicar = document.createElement("button");
+                                btnAplicar.textContent = "Aplicar";
+                                btnAplicar.className = "btn-aplicar";
+                                btnAplicar.addEventListener("click", function () {
+                                    abrirFormularioSolicitud(empleo);
+                                });
+
+                                tarjeta.appendChild(puesto);
+                                tarjeta.appendChild(lugar);
+                                tarjeta.appendChild(btnAplicar);
+
+                                resultados.appendChild(tarjeta);
+                            });
+                        });
+
+                    } catch (error) {
+                        resultados.innerHTML = "<p>Error al cargar las ofertas. Verifica que la API esté funcionando.</p>";
+                        console.error(error);
+                    }
+
+                    document.getElementById("btnVolverResultados").onclick = function () {
+                        mostrarPantalla(pantallaRegreso);
+                    };
                 }
 
-                resultados.innerHTML = "<p>Buscando ofertas...</p>";
+                // --- LÓGICA DEL FORMULARIO DE SOLICITUD ---
 
-                try {
-                    const parametros = new URLSearchParams();
+                function abrirFormularioSolicitud(empleo) {
+                    empleoSeleccionado = empleo;
+                    document.getElementById("subtituloPuesto").textContent =
+                        "Aplicando a: " + empleo.titulo + " (" + empleo.lugar + ")";
+                    mostrarPantalla(5);
+                }
 
-                    parametros.set("texto", texto);
-
-                    if (departamento !== "") {
-                        parametros.set("departamento", departamento);
+                // Formato automático de DUI (00000000-0)
+                document.getElementById("appDui").addEventListener("input", function (e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor.length > 8) {
+                        valor = valor.slice(0, 8) + "-" + valor.slice(8, 9);
                     }
+                    e.target.value = valor;
+                });
 
-                    const respuesta = await fetch(
-                        "/api/empleos?" + parametros.toString()
-                    );
-
-                    if (!respuesta.ok) {
-                        throw new Error("Error al consultar las ofertas.");
+                // Formato automático de celular (0000-0000)
+                document.getElementById("appCelular").addEventListener("input", function (e) {
+                    let valor = e.target.value.replace(/\D/g, "");
+                    if (valor.length > 4) {
+                        valor = valor.slice(0, 4) + "-" + valor.slice(4, 8);
                     }
+                    e.target.value = valor;
+                });
 
-                    const empleos = await respuesta.json();
+                // Envío del formulario
+                document.getElementById("formSolicitud").addEventListener("submit", async function (e) {
+                    e.preventDefault();
 
-                    resultados.innerHTML = "";
-
-                    if (empleos.length === 0) {
-                        resultados.innerHTML =
-                            "<p>No se encontraron ofertas de empleo.</p>";
+                    const dui = document.getElementById("appDui").value;
+                    if (dui.length < 10) {
+                        alert("Por favor ingresa un número de DUI válido (8 dígitos y el guion).");
                         return;
                     }
 
-                   
-                    const agrupados = {};
-
-                    empleos.forEach(function (empleo) {
-                        if (!agrupados[empleo.departamento]) {
-                            agrupados[empleo.departamento] = [];
-                        }
-
-                        agrupados[empleo.departamento].push(empleo);
-                    });
-
-                    Object.keys(agrupados).sort().forEach(function (nombre) {
-
-                        const encabezado = document.createElement("h2");
-                        encabezado.className = "departamento-titulo";
-                        encabezado.textContent = nombre;
-
-                        resultados.appendChild(encabezado);
-
-                        agrupados[nombre].forEach(function (empleo) {
-
-                            const tarjeta = document.createElement("div");
-                            tarjeta.className = "oferta";
-
-                            const puesto = document.createElement("h3");
-                            puesto.textContent = empleo.titulo;
-
-                            const lugar = document.createElement("p");
-                            lugar.textContent = "Lugar: " + empleo.lugar;
-
-                            tarjeta.appendChild(puesto);
-                            tarjeta.appendChild(lugar);
-
-                            resultados.appendChild(tarjeta);
-                        });
-                    });
-
-                } catch (error) {
-                    resultados.innerHTML =
-                        "<p>Error al cargar las ofertas. Verifica que la API esté funcionando.</p>";
-
-                    console.error(error);
-                }
-
-              
-                document.getElementById("btnVolverResultados").onclick =
-                    function () {
-                        mostrarPantalla(pantallaRegreso);
+                    const datosSolicitud = {
+                        puesto: empleoSeleccionado ? empleoSeleccionado.titulo : "General",
+                        departamento: empleoSeleccionado ? empleoSeleccionado.departamento : "",
+                        nombre: document.getElementById("appNombre").value.trim(),
+                        dui: dui,
+                        edad: document.getElementById("appEdad").value,
+                        residencia: document.getElementById("appResidencia").value.trim(),
+                        estudios: document.getElementById("appEstudios").value,
+                        celular: document.getElementById("appCelular").value,
+                        correo: document.getElementById("appCorreo").value.trim(),
+                        disponibilidad: document.getElementById("appDisponibilidad").value,
+                        experiencia: document.getElementById("appExperiencia").value.trim()
                     };
-            }
 
+                    try {
+                        // Aquí se envía a tu backend (ajusta la ruta si usas otra)
+                        const respuesta = await fetch("/api/aplicar", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(datosSolicitud)
+                        });
 
-            
-            document.querySelectorAll(".btnInicio").forEach(function (boton) {
-                boton.addEventListener("click", function () {
+                        if (!respuesta.ok) throw new Error("Error en el servidor");
+
+                        alert("¡Solicitud enviada con éxito! Nos pondremos en contacto contigo.");
+                    } catch (error) {
+                        // Si aún no has programado el endpoint /api/aplicar en tu backend, igual te avisa
+                        console.log("Datos listos para enviar:", datosSolicitud);
+                        alert("¡Solicitud registrada para " + datosSolicitud.puesto + "! (Conecta /api/aplicar en tu backend para guardarla en base de datos).");
+                    }
+
+                    document.getElementById("formSolicitud").reset();
                     mostrarPantalla(1);
                 });
-            });
 
+                document.getElementById("btnCancelarSolicitud").addEventListener("click", function () {
+                    mostrarPantalla(4);
+                });
+
+                document.querySelectorAll(".btnInicio").forEach(function (boton) {
+                    boton.addEventListener("click", function () {
+                        mostrarPantalla(1);
+                    });
+                });
     </script>
 
 </body>
