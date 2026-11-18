@@ -64,3 +64,6 @@ ul {
 li {
     margin-bottom: 8px;
 }
+.pantalla[hidden] {
+    display: none !important;
+}

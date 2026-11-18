@@ -5,36 +5,418 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Empleo Local</title>
     <link rel="stylesheet" href="estilos.css">
+
+    <style>
+        .pantalla[hidden] {
+            display: none !important;
+        }
+
+        .oferta {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+            .oferta h3 {
+                color: #3979ad;
+            }
+    </style>
 </head>
+
 <body>
-    <div class="ventana">
+
+    <div class="ventana pantalla" id="pantalla1">
+
         <h1>EMPLEO LOCAL</h1>
         <h2>Encuentra el trabajo que necesitas</h2>
 
         <input type="text" id="txtBuscar" autocomplete="off">
-        <button type="button" id="btnBuscar">Buscar</button>
 
-        <ul id="resultados"></ul>
+        <button type="button" id="btnBuscar">
+            Buscar
+        </button>
+
     </div>
 
-    <script>
-            async function buscar() {
-              const texto = document.getElementById("txtBuscar").value;
-              const respuesta = await fetch("/api/empleos?texto=" + encodeURIComponent(texto));
-              const empleos = await respuesta.json();
-              const lista = document.getElementById("resultados");
-              lista.innerHTML = "";
-              empleos.forEach(e => {
-                const li = document.createElement("li");
-                li.textContent = e.titulo + " - " + e.lugar;
-                lista.appendChild(li);
-              });
-            }
 
-            document.getElementById("btnBuscar").addEventListener("click", buscar);
-            document.getElementById("txtBuscar").addEventListener("keydown", e => {
-              if (e.key === "Enter") buscar();
-            });
+  
+    <div class="ventana pantalla" id="pantalla2" hidden>
+
+        <h1>EMPLEO LOCAL</h1>
+
+        <h2>¿QUÉ EMPLEO BUSCAS?</h2>
+
+        <p>Selecciona tu departamento</p>
+
+        <select id="departamento">
+            <option value="">Seleccionar departamento</option>
+            <option value="Ahuachapán">Ahuachapán</option>
+            <option value="Santa Ana">Santa Ana</option>
+            <option value="Sonsonate">Sonsonate</option>
+            <option value="Chalatenango">Chalatenango</option>
+            <option value="La Libertad">La Libertad</option>
+            <option value="San Salvador">San Salvador</option>
+            <option value="Cuscatlán">Cuscatlán</option>
+            <option value="La Paz">La Paz</option>
+            <option value="Cabañas">Cabañas</option>
+            <option value="San Vicente">San Vicente</option>
+            <option value="Usulután">Usulután</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="Morazán">Morazán</option>
+            <option value="La Unión">La Unión</option>
+        </select>
+
+        <br><br>
+
+        <button type="button" id="btnOfertas">
+            BUSCAR OFERTAS DE EMPLEO
+        </button>
+
+        <br>
+
+        <button type="button" id="btnVolver1">
+            Volver
+        </button>
+
+    </div>
+
+
+    
+    <div class="ventana pantalla" id="pantalla3" hidden>
+
+        <h1>OFERTAS DE EMPLEO</h1>
+
+        <button type="button" id="btnVolver2">
+            Volver al buscador
+        </button>
+
+        <div id="resultados">
+            <p>Las ofertas aparecerán aquí.</p>
+        </div>
+
+    </div>
+
+
+    <script>
+
+                        
+                        function mostrarPantalla(numero) {
+
+                            document.querySelectorAll(".pantalla").forEach(p => {
+                                p.hidden = true;
+                            });
+
+                            document.getElementById("pantalla" + numero).hidden = false;
+                        }
+
+
+                     
+                        document.getElementById("btnBuscar").addEventListener("click", function () {
+
+                            mostrarPantalla(2);
+
+                        });
+
+
+                       
+                        document.getElementById("btnVolver1").addEventListener("click", function () {
+
+                            mostrarPantalla(1);
+
+                        });
+
+
+                        
+                        async function buscarOfertas() {
+
+                            const texto = document.getElementById("txtBuscar").value;
+                            const departamento = document.getElementById("departamento").value;
+
+                            if (departamento === "") {
+                                alert("Selecciona un departamento");
+                                return;
+                            }
+
+                            mostrarPantalla(3);
+
+                            const lista = document.getElementById("resultados");
+
+                            lista.innerHTML = "<p>Buscando ofertas...</p>";
+
+                            try {
+
+                                const respuesta = await fetch(
+                                    "/api/empleos?texto=" + encodeURIComponent(texto)
+                                );
+
+                                if (!respuesta.ok) {
+                                    throw new Error("Error al consultar las ofertas");
+                                }
+
+                                const empleos = await respuesta.json();
+
+                                lista.innerHTML = "";
+
+                                if (empleos.length === 0) {
+                                    lista.innerHTML = "<p>No se encontraron ofertas.</p>";
+                                    return;
+                                }
+
+                                empleos.forEach(e => {
+
+                                    const oferta = document.createElement("div");
+                                    oferta.className = "oferta";
+
+                                    const titulo = document.createElement("h3");
+                                    titulo.textContent = e.titulo;
+
+                                    const lugar = document.createElement("p");
+                                    lugar.textContent = "Ubicación: " + e.lugar;
+
+                                    oferta.appendChild(titulo);
+                                    oferta.appendChild(lugar);
+
+                                    lista.appendChild(oferta);
+
+                                });
+
+                            } catch (error) {
+
+                                lista.innerHTML =
+                                    "<p>No se pudieron cargar las ofertas. Verifica la conexión con la API.</p>";
+
+                                console.error(error);
+
+                            }
+
+                        }
+
+
+                        document.getElementById("btnOfertas").addEventListener(
+                            "click", buscarOfertas
+                        );
+
+
+                        
+                        document.getElementById("btnVolver2").addEventListener("click", function () {
+
+                            mostrarPantalla(2);
+
+                        });
+
     </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empleo Local</title>
+    <link rel="stylesheet" href="estilos.css">
+
+    <style>
+        .pantalla[hidden] {
+            display: none !important;
+        }
+
+        .oferta {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+            .oferta h3 {
+                color: #3979ad;
+            }
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="ventana pantalla" id="pantalla1">
+
+        <h1>EMPLEO LOCAL</h1>
+        <h2>Encuentra el trabajo que necesitas</h2>
+
+        <input type="text" id="txtBuscar" autocomplete="off">
+
+        <button type="button" id="btnBuscar">
+            Buscar
+        </button>
+
+    </div>
+
+
+    <div class="ventana pantalla" id="pantalla2" hidden>
+
+        <h1>EMPLEO LOCAL</h1>
+
+        <h2>¿QUÉ EMPLEO BUSCAS?</h2>
+
+        <p>Selecciona tu departamento</p>
+
+        <select id="departamento">
+            <option value="">Seleccionar departamento</option>
+            <option value="Ahuachapán">Ahuachapán</option>
+            <option value="Santa Ana">Santa Ana</option>
+            <option value="Sonsonate">Sonsonate</option>
+            <option value="Chalatenango">Chalatenango</option>
+            <option value="La Libertad">La Libertad</option>
+            <option value="San Salvador">San Salvador</option>
+            <option value="Cuscatlán">Cuscatlán</option>
+            <option value="La Paz">La Paz</option>
+            <option value="Cabañas">Cabañas</option>
+            <option value="San Vicente">San Vicente</option>
+            <option value="Usulután">Usulután</option>
+            <option value="San Miguel">San Miguel</option>
+            <option value="Morazán">Morazán</option>
+            <option value="La Unión">La Unión</option>
+        </select>
+
+        <br><br>
+
+        <button type="button" id="btnOfertas">
+            BUSCAR OFERTAS DE EMPLEO
+        </button>
+
+        <br>
+
+        <button type="button" id="btnVolver1">
+            Volver
+        </button>
+
+    </div>
+
+
+    
+    <div class="ventana pantalla" id="pantalla3" hidden>
+
+        <h1>OFERTAS DE EMPLEO</h1>
+
+        <button type="button" id="btnVolver2">
+            Volver al buscador
+        </button>
+
+        <div id="resultados">
+            <p>Las ofertas aparecerán aquí.</p>
+        </div>
+
+    </div>
+
+
+    <script>
+
+                function mostrarPantalla(numero) {
+
+                    document.querySelectorAll(".pantalla").forEach(p => {
+                        p.hidden = true;
+                    });
+
+                    document.getElementById("pantalla" + numero).hidden = false;
+                }
+
+
+           
+                document.getElementById("btnBuscar").addEventListener("click", function () {
+
+                    mostrarPantalla(2);
+
+                });
+
+
+          
+                document.getElementById("btnVolver1").addEventListener("click", function () {
+
+                    mostrarPantalla(1);
+
+                });
+
+
+              
+                async function buscarOfertas() {
+
+                    const texto = document.getElementById("txtBuscar").value;
+                    const departamento = document.getElementById("departamento").value;
+
+                    if (departamento === "") {
+                        alert("Selecciona un departamento");
+                        return;
+                    }
+
+                    mostrarPantalla(3);
+
+                    const lista = document.getElementById("resultados");
+
+                    lista.innerHTML = "<p>Buscando ofertas...</p>";
+
+                    try {
+
+                        const respuesta = await fetch(
+                            "/api/empleos?texto=" + encodeURIComponent(texto) +
+                            "&departamento=" + encodeURIComponent(departamento)
+                        );
+
+                        if (!respuesta.ok) {
+                            throw new Error("Error al consultar las ofertas");
+                        }
+
+                        const empleos = await respuesta.json();
+
+                        lista.innerHTML = "";
+
+                        if (empleos.length === 0) {
+                            lista.innerHTML = "<p>No se encontraron ofertas.</p>";
+                            return;
+                        }
+
+                        empleos.forEach(e => {
+
+                            const oferta = document.createElement("div");
+                            oferta.className = "oferta";
+
+                            const titulo = document.createElement("h3");
+                            titulo.textContent = e.titulo;
+
+                            const lugar = document.createElement("p");
+                            lugar.textContent = "Ubicación: " + e.lugar;
+
+                            oferta.appendChild(titulo);
+                            oferta.appendChild(lugar);
+
+                            lista.appendChild(oferta);
+
+                        });
+
+                    } catch (error) {
+
+                        lista.innerHTML =
+                            "<p>No se pudieron cargar las ofertas. Verifica la conexión con la API.</p>";
+
+                        console.error(error);
+
+                    }
+
+                }
+
+
+                document.getElementById("btnOfertas").addEventListener(
+                    "click", buscarOfertas
+                );
+
+
+               
+                document.getElementById("btnVolver2").addEventListener("click", function () {
+
+                    mostrarPantalla(2);
+
+                });
+
+    </script>
+
 </body>
 </html>
