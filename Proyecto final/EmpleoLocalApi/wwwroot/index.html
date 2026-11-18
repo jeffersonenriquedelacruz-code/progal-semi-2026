@@ -10,6 +10,55 @@
         .pantalla[hidden] {
             display: none !important;
         }
+
+        .acciones {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+            .acciones button,
+            .departamentos button {
+                width: 65%;
+                min-height: 38px;
+            }
+
+        .departamentos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .oferta {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 12px auto;
+            max-width: 550px;
+            text-align: left;
+        }
+
+            .oferta h3 {
+                margin: 0 0 8px;
+            }
+
+        .departamento-titulo {
+            margin-top: 25px;
+            border-bottom: 2px solid #555;
+            padding-bottom: 6px;
+        }
+
+        input, select {
+            display: block;
+            width: 65%;
+            min-height: 35px;
+            margin: 12px auto;
+            padding: 5px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
@@ -17,154 +66,272 @@
 
     <div class="ventana">
 
-     
+        
         <section id="pantalla1" class="pantalla">
             <h1>EMPLEO LOCAL</h1>
             <h2>Encuentra el trabajo que necesitas</h2>
 
+            <div class="acciones">
+                <button id="btnBuscarEspecifico">
+                    Buscar un empleo específico
+                </button>
+
+                <button id="btnGeneral">
+                    Ver empleos disponibles en general
+                </button>
+            </div>
+        </section>
+
+
+       
+        <section id="pantalla2" class="pantalla" hidden>
+            <h1>BUSCAR EMPLEO</h1>
+            <h2>Escribe el puesto y selecciona el departamento</h2>
+
             <input type="text"
                    id="txtBuscar"
-                   placeholder="¿Qué trabajo estás buscando?">
+                   placeholder="Ejemplo: Mecánico">
 
-            <button id="btnBuscar">Buscar</button>
-        </section>
-
-
-        
-        <section id="pantalla2" class="pantalla" hidden>
-            <h1>EMPLEO LOCAL</h1>
-            <h2>Selecciona tu departamento</h2>
-
-            <select id="departamento">
+            <select id="departamentoBusqueda">
                 <option value="">Selecciona un departamento</option>
-                <option value="Ahuachapán">Ahuachapán</option>
-                <option value="Santa Ana">Santa Ana</option>
-                <option value="Sonsonate">Sonsonate</option>
-                <option value="Chalatenango">Chalatenango</option>
-                <option value="La Libertad">La Libertad</option>
-                <option value="San Salvador">San Salvador</option>
-                <option value="Cuscatlán">Cuscatlán</option>
-                <option value="La Paz">La Paz</option>
-                <option value="Cabañas">Cabañas</option>
-                <option value="San Vicente">San Vicente</option>
-                <option value="Usulután">Usulután</option>
-                <option value="San Miguel">San Miguel</option>
-                <option value="Morazán">Morazán</option>
-                <option value="La Unión">La Unión</option>
             </select>
 
+            <button id="btnEjecutarBusqueda">Buscar</button>
             <br><br>
+            <button class="btnInicio">Regresar</button>
+        </section>
 
-            <button id="btnOfertas">Ver ofertas</button>
+
+       
+        <section id="pantalla3" class="pantalla" hidden>
+            <h1>EMPLEOS DISPONIBLES</h1>
+            <h2>Selecciona un departamento</h2>
+
+            <div id="listaDepartamentos" class="departamentos"></div>
+
+            <br>
+            <button id="btnTodos">Ver todos los departamentos</button>
             <br><br>
-            <button id="btnVolver1">Regresar</button>
+            <button class="btnInicio">Regresar</button>
         </section>
 
 
         
-        <section id="pantalla3" class="pantalla" hidden>
-            <h1>OFERTAS DE EMPLEO</h1>
+        <section id="pantalla4" class="pantalla" hidden>
+            <h1 id="tituloResultados">OFERTAS DE EMPLEO</h1>
 
             <div id="resultados"></div>
 
             <br>
-            <button id="btnVolver2">Regresar</button>
+            <button id="btnVolverResultados">Regresar</button>
+            <br><br>
+            <button class="btnInicio">Inicio</button>
         </section>
 
     </div>
 
 
     <script>
-                function mostrarPantalla(numero) {
-                    document.getElementById("pantalla1").hidden = numero !== 1;
-                    document.getElementById("pantalla2").hidden = numero !== 2;
-                    document.getElementById("pantalla3").hidden = numero !== 3;
+
+            const nombresDepartamentos = [
+                "Ahuachapán",
+                "Santa Ana",
+                "Sonsonate",
+                "Chalatenango",
+                "La Libertad",
+                "San Salvador",
+                "Cuscatlán",
+                "La Paz",
+                "Cabañas",
+                "San Vicente",
+                "Usulután",
+                "San Miguel",
+                "Morazán",
+                "La Unión"
+            ];
+
+
+            function mostrarPantalla(numero) {
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById("pantalla" + i).hidden = i !== numero;
                 }
+            }
 
-                
-                document.getElementById("btnBuscar").addEventListener("click", function () {
-                    const texto = document.getElementById("txtBuscar").value.trim();
 
-                    if (texto === "") {
-                        alert("Escribe el trabajo que estás buscando.");
-                        return;
-                    }
+            const selectDepartamento =
+                document.getElementById("departamentoBusqueda");
 
+            nombresDepartamentos.forEach(function (departamento) {
+                const opcion = document.createElement("option");
+                opcion.value = departamento;
+                opcion.textContent = departamento;
+                selectDepartamento.appendChild(opcion);
+            });
+
+
+            const listaDepartamentos =
+                document.getElementById("listaDepartamentos");
+
+            nombresDepartamentos.forEach(function (departamento) {
+                const boton = document.createElement("button");
+
+                boton.textContent = departamento;
+
+                boton.addEventListener("click", function () {
+                    consultarEmpleos("", departamento, 3);
+                });
+
+                listaDepartamentos.appendChild(boton);
+            });
+
+
+           
+            document.getElementById("btnBuscarEspecifico")
+                .addEventListener("click", function () {
                     mostrarPantalla(2);
                 });
 
 
-               
-                document.getElementById("btnVolver1").addEventListener("click", function () {
-                    mostrarPantalla(1);
+         
+            document.getElementById("btnGeneral")
+                .addEventListener("click", function () {
+                    mostrarPantalla(3);
                 });
 
 
-                document.getElementById("btnOfertas").addEventListener("click", buscarOfertas);
+          
+            document.getElementById("btnEjecutarBusqueda")
+                .addEventListener("click", function () {
 
-                async function buscarOfertas() {
                     const texto = document.getElementById("txtBuscar").value.trim();
-                    const departamento = document.getElementById("departamento").value;
+                    const departamento = selectDepartamento.value;
+
+                    if (texto === "") {
+                        alert("Escribe el empleo que estás buscando.");
+                        return;
+                    }
 
                     if (departamento === "") {
                         alert("Selecciona un departamento.");
                         return;
                     }
 
-                    mostrarPantalla(3);
+                    consultarEmpleos(texto, departamento, 2);
+                });
 
-                    const resultados = document.getElementById("resultados");
-                    resultados.innerHTML = "<p>Buscando ofertas...</p>";
 
-                    try {
-                        const url = "/api/empleos?texto=" +
-                            encodeURIComponent(texto) +
-                            "&departamento=" +
-                            encodeURIComponent(departamento);
+           
+            document.getElementById("btnTodos")
+                .addEventListener("click", function () {
+                    consultarEmpleos("", "", 3);
+                });
 
-                        const respuesta = await fetch(url);
 
-                        if (!respuesta.ok) {
-                            throw new Error("Error al consultar las ofertas.");
+            
+            async function consultarEmpleos(texto, departamento, pantallaRegreso) {
+
+                mostrarPantalla(4);
+
+                const resultados = document.getElementById("resultados");
+                const titulo = document.getElementById("tituloResultados");
+
+                if (texto !== "") {
+                    titulo.textContent = "RESULTADOS: " + texto.toUpperCase();
+                } else if (departamento !== "") {
+                    titulo.textContent = "EMPLEOS EN " + departamento.toUpperCase();
+                } else {
+                    titulo.textContent = "TODOS LOS EMPLEOS DISPONIBLES";
+                }
+
+                resultados.innerHTML = "<p>Buscando ofertas...</p>";
+
+                try {
+                    const parametros = new URLSearchParams();
+
+                    parametros.set("texto", texto);
+
+                    if (departamento !== "") {
+                        parametros.set("departamento", departamento);
+                    }
+
+                    const respuesta = await fetch(
+                        "/api/empleos?" + parametros.toString()
+                    );
+
+                    if (!respuesta.ok) {
+                        throw new Error("Error al consultar las ofertas.");
+                    }
+
+                    const empleos = await respuesta.json();
+
+                    resultados.innerHTML = "";
+
+                    if (empleos.length === 0) {
+                        resultados.innerHTML =
+                            "<p>No se encontraron ofertas de empleo.</p>";
+                        return;
+                    }
+
+                   
+                    const agrupados = {};
+
+                    empleos.forEach(function (empleo) {
+                        if (!agrupados[empleo.departamento]) {
+                            agrupados[empleo.departamento] = [];
                         }
 
-                        const empleos = await respuesta.json();
+                        agrupados[empleo.departamento].push(empleo);
+                    });
 
-                        resultados.innerHTML = "";
+                    Object.keys(agrupados).sort().forEach(function (nombre) {
 
-                        if (empleos.length === 0) {
-                            resultados.innerHTML = "<p>No se encontraron ofertas en este departamento.</p>";
-                            return;
-                        }
+                        const encabezado = document.createElement("h2");
+                        encabezado.className = "departamento-titulo";
+                        encabezado.textContent = nombre;
 
-                        empleos.forEach(function (empleo) {
-                            const elemento = document.createElement("div");
+                        resultados.appendChild(encabezado);
 
-                            const titulo = document.createElement("h3");
-                            titulo.textContent = empleo.titulo;
+                        agrupados[nombre].forEach(function (empleo) {
+
+                            const tarjeta = document.createElement("div");
+                            tarjeta.className = "oferta";
+
+                            const puesto = document.createElement("h3");
+                            puesto.textContent = empleo.titulo;
 
                             const lugar = document.createElement("p");
                             lugar.textContent = "Lugar: " + empleo.lugar;
 
-                            elemento.appendChild(titulo);
-                            elemento.appendChild(lugar);
+                            tarjeta.appendChild(puesto);
+                            tarjeta.appendChild(lugar);
 
-                            resultados.appendChild(elemento);
+                            resultados.appendChild(tarjeta);
                         });
+                    });
 
-                    } catch (error) {
-                        resultados.innerHTML = "<p>Error al cargar las ofertas. Verifica que la API esté funcionando.</p>";
-                        console.error(error);
-                    }
+                } catch (error) {
+                    resultados.innerHTML =
+                        "<p>Error al cargar las ofertas. Verifica que la API esté funcionando.</p>";
+
+                    console.error(error);
                 }
+
+              
+                document.getElementById("btnVolverResultados").onclick =
+                    function () {
+                        mostrarPantalla(pantallaRegreso);
+                    };
+            }
 
 
             
-                document.getElementById("btnVolver2").addEventListener("click", function () {
-                    mostrarPantalla(2);
+            document.querySelectorAll(".btnInicio").forEach(function (boton) {
+                boton.addEventListener("click", function () {
+                    mostrarPantalla(1);
                 });
+            });
 
     </script>
 
 </body>
-</html> 
+</html>
